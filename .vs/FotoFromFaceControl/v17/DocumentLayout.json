@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\wwwroot\\html\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:wwwroot\\html\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -62,19 +62,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAUwC4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T09:20:02.913Z"
+              "WhenOpened": "2025-07-17T09:20:02.913Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\wwwroot\\html\\index.html",
               "RelativeDocumentMoniker": "wwwroot\\html\\index.html",
@@ -86,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SelectedFetures.cs",
               "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\SelectedFetures.cs",
               "RelativeDocumentMoniker": "Controllers\\SelectedFetures.cs",
@@ -98,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UploadAndProcess.cs",
               "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadAndProcess.cs",
               "RelativeDocumentMoniker": "Controllers\\UploadAndProcess.cs",
