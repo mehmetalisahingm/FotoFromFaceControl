@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\selectedfetures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\selectedfetures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\wwwroot\\html\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:wwwroot\\html\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\gallerycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\gallerycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GalleryController.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\GalleryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GalleryController.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\GalleryController.cs",
+              "RelativeToolTip": "Controllers\\GalleryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:50:27.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UploadController.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UploadController.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadController.cs",
+              "RelativeToolTip": "Controllers\\UploadController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T10:01:51.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T09:20:02.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\wwwroot\\html\\index.html",
+              "RelativeDocumentMoniker": "wwwroot\\html\\index.html",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\wwwroot\\html\\index.html",
+              "RelativeToolTip": "wwwroot\\html\\index.html",
+              "ViewState": "AgIAAGUBAAAAAAAAAAAuwJEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-07-17T09:18:41.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SelectedFetures.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\SelectedFetures.cs",
+              "RelativeDocumentMoniker": "Controllers\\SelectedFetures.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\SelectedFetures.cs",
+              "RelativeToolTip": "Controllers\\SelectedFetures.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:56:56.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UploadAndProcess.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadAndProcess.cs",
+              "RelativeDocumentMoniker": "Controllers\\UploadAndProcess.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadAndProcess.cs",
+              "RelativeToolTip": "Controllers\\UploadAndProcess.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAYwIUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:50:15.976Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

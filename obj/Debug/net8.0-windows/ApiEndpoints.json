@@ -1,0 +1,119 @@
+[
+  {
+    "ContainingType": "DetectFaceFeaturesController",
+    "Method": "UploadAndProcess",
+    "RelativePath": "api/DetectFaceFeatures/upload-and-process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropface",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropeyes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropnose",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "scaleFactor",
+        "Type": "System.Single",
+        "IsRequired": false
+      },
+      {
+        "Name": "minNeighbors",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minWidth",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minHeight",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DetectFaceFeaturesController1",
+    "Method": "UploadAndProcess",
+    "RelativePath": "api/DetectFaceFeaturesController1/upload-and-process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "iscropped",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "faceName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "scaleFactor",
+        "Type": "System.Single",
+        "IsRequired": false
+      },
+      {
+        "Name": "minNeighbors",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minWidth",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minHeight",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.GalleryController",
+    "Method": "GetPhotos",
+    "RelativePath": "api/Gallery/photos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UploadsController",
+    "Method": "ListFiles",
+    "RelativePath": "api/uploads/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

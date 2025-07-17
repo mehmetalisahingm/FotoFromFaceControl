@@ -1,0 +1,65 @@
+[
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.DetectFaceFeaturesController",
+    "Method": "ProcessPhoto",
+    "RelativePath": "api/DetectFaceFeatures/process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FotoFromFaceControl.Models.ProcessRequestModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "iscropped",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.DetectFaceFeaturesController",
+    "Method": "UploadPhoto",
+    "RelativePath": "api/DetectFaceFeatures/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.SelectedFetures",
+    "Method": "ProcessSelectedFeatures",
+    "RelativePath": "api/SelectedFetures/process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FotoFromFaceControl.Models.ProcessRequestModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "cropeyes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropnose",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

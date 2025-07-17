@@ -1,0 +1,14 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Fotoğraf Yükle</title>
+</head>
+<body>
+    <h2>Fotoğraf Yükle</h2>
+    <form enctype="multipart/form-data" method="post" action="/api/photo/upload">
+        <input type="file" name="photo" accept="image/*" required />
+        <button type="submit">Gönder</button>
+    </form>
+</body>
+</html>
