@@ -3,130 +3,159 @@ using Emgu.CV.Structure;
 using FotoFromFaceControl.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
-using System.IO;
 using System.IO.Compression;
 
-[ApiController]
-[Route("api/[controller]")]
-public class DetectFaceFeaturesController1: ControllerBase
+namespace FotoFromFaceControl.Controllers
 {
-    private readonly CascadeClassifier _faceCascade;
-
-    public DetectFaceFeaturesController1 (IWebHostEnvironment env)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DetectFaceFeaturesController : ControllerBase
     {
-        var cascadePath = Path.Combine(env.WebRootPath, "CasCades", "haarcascade_frontalface_default.xml");
-        _faceCascade = new CascadeClassifier(cascadePath);
-    }
+        private readonly CascadeClassifier _faceCascade;
+        private readonly IWebHostEnvironment _env;
 
-    [HttpPost("upload-and-process")]
-    public IActionResult UploadAndProcess(
-        [FromForm] FileUploadModel photo,
-        [FromQuery] bool iscropped,
-        [FromQuery] string faceName = "",
-        [FromQuery] float scaleFactor = 1.05f,
-        [FromQuery] int minNeighbors = 3,
-        [FromQuery] int minWidth = 30,
-        [FromQuery] int minHeight = 30)
-    {
-        if (photo == null || photo.File == null)
-            return BadRequest("Dosya eksik.");
-
-        var ext = Path.GetExtension(photo.File.FileName).ToLowerInvariant();
-
-        if (ext == ".mp4")
+        public DetectFaceFeaturesController(IWebHostEnvironment env)
         {
-            using var videoStream = new MemoryStream();
-            photo.File.CopyTo(videoStream);
-            var tempPath = Path.GetTempFileName() + ".mp4";
-            System.IO.File.WriteAllBytes(tempPath, videoStream.ToArray());
+            _env = env;
+            string cascadePath = Path.Combine(env.WebRootPath, "CasCades");
+            _faceCascade = new CascadeClassifier(Path.Combine(cascadePath, "haarcascade_frontalface_default.xml"));
+        }
+        [HttpPost("upload-and-process")]
+        public async Task<IActionResult> UploadAndProcessAsync(
+            [FromForm] FileUploadModel file,
+            [FromQuery] bool cropFace = false,
+            [FromQuery] bool cropEyes = false,
+            [FromQuery] bool cropNose = false,
+            [FromQuery] float scaleFactor = 1.05f,
+            [FromQuery] int minNeighbors = 3,
+            [FromQuery] int minWidth = 30,
+            [FromQuery] int minHeight = 30,
+            [FromQuery] float distance = 0f)
+        {
+            if (file == null || file.File.Length == 0)
+                return BadRequest("Dosya yüklenmedi.");
 
-            using var capture = new VideoCapture(tempPath);
-            using var archiveStream = new MemoryStream();
-            using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true);
-
-            int frameIndex = 0;
-            Mat frame = new Mat();
-
-            while (capture.Read(frame))
+            try
             {
-                if (frame.IsEmpty) break;
+                await using var ms = new MemoryStream();
+                await file.File.CopyToAsync(ms);
+                ms.Position = 0;
 
-                var img = frame.ToImage<Bgr, byte>();
-                var gray = img.Convert<Gray, byte>();
+                using var bitmap = new Bitmap(ms);
+                using var img = bitmap.ToImage<Bgr, byte>();
+                using var gray = img.Convert<Gray, byte>();
 
                 var faces = _faceCascade.DetectMultiScale(gray, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
-                foreach (var face in faces)
+
+                if (faces.Length == 0)
+                    return BadRequest("Yüz bulunamadı.");
+
+                var archiveStream = new MemoryStream();
+                using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true))
                 {
-                    if (iscropped)
+                    int count = 1;
+                    foreach (var face in faces)
                     {
-                        using var cropped = img.Copy(face);
-                        using var croppedBmp = cropped.ToBitmap();
-                        var entry = archive.CreateEntry($"frame_{frameIndex}_face.jpg");
-                        using var entryStream = entry.Open();
-                        croppedBmp.Save(entryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        var faceROI = new Rectangle(face.X, face.Y, face.Width, face.Height);
+                        using var faceGray = new Mat(gray.Mat, faceROI);
+
+                        if (cropFace)
+                        {
+                            using var croppedFace = img.Copy(face);
+                            using var croppedBitmap = croppedFace.ToBitmap();
+                            var entry = archive.CreateEntry($"face_{count}.jpg");
+                            await using var entryStream = entry.Open();
+                            croppedBitmap.Save(entryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        }
+
+                        // Aynı şekilde cropEyes ve cropNose bölümleri için de await eklenebilir.
+                        // ...
+                        count++;
                     }
-                    else
-                    {
-                        CvInvoke.Rectangle(img, face, new MCvScalar(0, 0, 255), 2);
-                        using var msOut = new MemoryStream();
-                        img.ToBitmap().Save(msOut, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        var entry = archive.CreateEntry($"frame_{frameIndex}_drawn.jpg");
-                        using var entryStream = entry.Open();
-                        msOut.Position = 0;
-                        msOut.CopyTo(entryStream);
-                    }
-                }
-
-                frameIndex++;
-            }
-
-            archiveStream.Position = 0;
-            return File(archiveStream.ToArray(), "application/zip", "video_result.zip");
-        }
-        else
-        {
-            using var ms = new MemoryStream();
-            photo.File.CopyTo(ms);
-            ms.Position = 0;
-
-            using var bitmap = new Bitmap(ms);
-            using var img = bitmap.ToImage<Bgr, byte>();
-            var gray = img.Convert<Gray, byte>();
-
-            var faces = _faceCascade.DetectMultiScale(gray, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
-            if (faces.Length == 0)
-                return BadRequest("Yüz bulunamadı.");
-
-            if (iscropped)
-            {
-                using var archiveStream = new MemoryStream();
-                using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true);
-
-                int count = 1;
-                foreach (var face in faces)
-                {
-                    using var croppedFace = img.Copy(face);
-                    using var croppedBitmap = croppedFace.ToBitmap();
-                    var entry = archive.CreateEntry($"face_{count}.jpg");
-                    using var entryStream = entry.Open();
-                    croppedBitmap.Save(entryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    count++;
                 }
 
                 archiveStream.Position = 0;
-                return File(archiveStream.ToArray(), "application/zip", "cropped_faces.zip");
+                return File(archiveStream.ToArray(), "application/zip", "selected_features.zip");
             }
-            else
+            catch (Exception ex)
             {
-                foreach (var face in faces)
+                return StatusCode(500, $"Hata oluştu: {ex.Message}");
+            }
+        }
+
+
+        // Video dosyası için yeni endpoint: kare kare işleme
+        [HttpPost("upload-video")]
+        public IActionResult UploadAndProcessVideo(
+            [FromForm] FileUploadModel file,
+            [FromQuery] float scaleFactor = 1.05f,
+            [FromQuery] int minNeighbors = 3,
+            [FromQuery] int minWidth = 30,
+            [FromQuery] int minHeight = 30)
+        {
+            if (file == null || file.File.Length == 0)
+                return BadRequest("Dosya yüklenmedi.");
+
+            try
+            {
+                // Geçici klasör ve dosya yolu
+                var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                Directory.CreateDirectory(tempDir);
+                
+                var videoPath = Path.Combine(tempDir, file.File.FileName);
+
+                using (var fs = new FileStream(videoPath, FileMode.Create))
                 {
-                    CvInvoke.Rectangle(img, face, new MCvScalar(0, 0, 255), 2);
+                    file.File.CopyTo(fs);
                 }
 
-                using var msOut = new MemoryStream();
-                img.ToBitmap().Save(msOut, System.Drawing.Imaging.ImageFormat.Jpeg);
-                msOut.Position = 0;
-                return File(msOut.ToArray(), "image/jpeg", "result_with_faces.jpg");
+
+                using (var fs = new FileStream(videoPath, FileMode.Create))
+                {
+                    file.File.CopyTo(fs);
+                }
+
+                var archiveStream = new MemoryStream();
+                using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true))
+                using (var capture = new VideoCapture(videoPath))
+                {
+                    int frameIndex = 0;
+                    Mat frame = new Mat();
+
+                    while (true)
+                    {
+                        if (!capture.Read(frame) || frame.IsEmpty)
+                            break;
+
+                        using var image = frame.ToImage<Bgr, byte>();
+                        using var gray = image.Convert<Gray, byte>();
+
+                        var faces = _faceCascade.DetectMultiScale(gray, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+
+                        int faceCount = 0;
+                        foreach (var face in faces)
+                        {
+                            using var croppedFace = image.Copy(face);
+                            using var croppedBitmap = croppedFace.ToBitmap();
+
+                            var entry = archive.CreateEntry($"frame_{frameIndex}_face_{faceCount}.jpg");
+                            using var entryStream = entry.Open();
+                            croppedBitmap.Save(entryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            faceCount++;
+                        }
+
+                        frameIndex++;
+                    }
+                }
+
+                archiveStream.Position = 0;
+                Directory.Delete(tempDir, true);
+
+                return File(archiveStream.ToArray(), "application/zip", "detected_faces_from_video.zip");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Hata oluştu: {ex.Message}");
             }
         }
     }

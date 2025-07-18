@@ -1,127 +1,250 @@
-﻿using Emgu.CV;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Emgu.CV;
 using Emgu.CV.Structure;
-using FotoFromFaceControl.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
-using System.IO;
 using System.IO.Compression;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
-[ApiController]
-[Route("api/[controller]")]
-public class DetectFaceFeaturesController : ControllerBase
+namespace FotoFromFaceControl.Controllers
 {
-    private readonly CascadeClassifier _faceCascade;
-    private readonly CascadeClassifier _eyeCascade;
-    private readonly CascadeClassifier _noseCascade;
-
-    public DetectFaceFeaturesController(IWebHostEnvironment env)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SelectedFeaturesController : ControllerBase
     {
-        string cascadeBasePath = Path.Combine(env.WebRootPath, "CasCades");
-        _faceCascade = new CascadeClassifier(Path.Combine(cascadeBasePath, "haarcascade_frontalface_default.xml"));
-        _eyeCascade = new CascadeClassifier(Path.Combine(cascadeBasePath, "haarcascade_eye.xml"));
-        _noseCascade = new CascadeClassifier(Path.Combine(cascadeBasePath, "nose.xml"));
-    }
+        private readonly string _cascadePath;
+        private readonly CascadeClassifier faceCascade;
+        private readonly CascadeClassifier eyesCascade;
+        private readonly CascadeClassifier noseCascade;
 
-    [HttpPost("upload-and-process")]
-    public IActionResult UploadAndProcess(
-        [FromForm] FileUploadModel photo,
-        [FromQuery] bool cropface = false,
-        [FromQuery] bool cropeyes = false,
-        [FromQuery] bool cropnose = false,
-        [FromQuery] float scaleFactor = 1.05f,
-        [FromQuery] int minNeighbors = 3,
-        [FromQuery] int minWidth = 30,
-        [FromQuery] int minHeight = 30)
-    {
-        if (photo == null || photo.File == null)
-            return BadRequest("Dosya eksik.");
-
-        var ext = Path.GetExtension(photo.File.FileName).ToLower();
-        var allowedExt = new[] { ".jpg", ".jpeg", ".png", ".bmp" };
-        if (!allowedExt.Contains(ext))
-            return BadRequest("Lütfen jpg, jpeg, png veya bmp formatında bir resim yükleyin.");
-
-        using var ms = new MemoryStream();
-        photo.File.CopyTo(ms);
-        ms.Position = 0;
-
-        using var bitmap = new Bitmap(ms);
-        using var img = bitmap.ToImage<Bgr, byte>();
-        using var gray = img.Convert<Gray, byte>();
-
-        var faces = _faceCascade.DetectMultiScale(gray, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
-        if (faces.Length == 0)
-            return BadRequest("Yüz bulunamadı.");
-
-        if (cropface || cropeyes || cropnose)
+        public SelectedFeaturesController(IWebHostEnvironment env)
         {
-            using var archiveStream = new MemoryStream();
-            using var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true);
-            int count = 1;
-
-            foreach (var face in faces)
-            {
-                if (cropface)
-                {
-                    using var croppedFace = img.Copy(face);
-                    using var croppedBitmap = croppedFace.ToBitmap();
-                    var entry = archive.CreateEntry($"face_{count}.jpg");
-                    using var entryStream = entry.Open();
-                    croppedBitmap.Save(entryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    count++;
-                }
-
-                var faceROI = new Rectangle(face.X, face.Y, face.Width, face.Height);
-                using var faceGray = new Mat(gray.Mat, faceROI);
-
-                if (cropeyes)
-                {
-                    var eyes = _eyeCascade.DetectMultiScale(faceGray, scaleFactor, minNeighbors, new Size(minWidth / 2, minHeight / 2));
-                    int eyeCount = 1;
-                    foreach (var eye in eyes)
-                    {
-                        var rect = new Rectangle(face.X + eye.X, face.Y + eye.Y, eye.Width, eye.Height);
-                        using var eyeImg = img.Copy(rect);
-                        using var eyeBmp = eyeImg.ToBitmap();
-                        var entry = archive.CreateEntry($"eye_{count}_{eyeCount}.jpg");
-                        using var stream = entry.Open();
-                        eyeBmp.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        eyeCount++;
-                    }
-                }
-
-                if (cropnose)
-                {
-                    var noses = _noseCascade.DetectMultiScale(faceGray, scaleFactor, minNeighbors, new Size(minWidth / 2, minHeight / 2));
-                    int noseCount = 1;
-                    foreach (var nose in noses)
-                    {
-                        var rect = new Rectangle(face.X + nose.X, face.Y + nose.Y, nose.Width, nose.Height);
-                        using var noseImg = img.Copy(rect);
-                        using var noseBmp = noseImg.ToBitmap();
-                        var entry = archive.CreateEntry($"nose_{count}_{noseCount}.jpg");
-                        using var stream = entry.Open();
-                        noseBmp.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        noseCount++;
-                    }
-                }
-            }
-
-            archiveStream.Position = 0;
-            return File(archiveStream.ToArray(), "application/zip", "cropped_features.zip");
+            _cascadePath = Path.Combine(env.WebRootPath, "Cascades");
+            faceCascade = new CascadeClassifier(Path.Combine(_cascadePath, "haarcascade_frontalface_default.xml"));
+            eyesCascade = new CascadeClassifier(Path.Combine(_cascadePath, "haarcascade_eye.xml"));
+            noseCascade = new CascadeClassifier(Path.Combine(_cascadePath, "nose.xml"));
         }
-        else
+
+        [HttpPost("upload-and-process")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UploadAndProcess(
+            [FromQuery] bool cropFace = true,
+            [FromQuery] bool cropEyes = true,
+            [FromQuery] bool cropNose = true,
+            [FromQuery] double scaleFactor = 1.05,
+            [FromQuery] int minNeighbors = 3,
+            [FromQuery] int minWidth = 30,
+            [FromQuery] int minHeight = 30,
+            [FromQuery] double distance = 0)
         {
-            // Kırpma seçilmemişse, yüzlerin etrafına kutu çiz ve tek jpg olarak gönder
-            foreach (var face in faces)
+            if (Request.Form.Files.Count == 0)
+                return BadRequest("Dosya bulunamadı.");
+
+            var file = Request.Form.Files[0];
+            string ext = Path.GetExtension(file.FileName).ToLower();
+
+            if (ext != ".jpg" && ext != ".jpeg" && ext != ".png" && ext != ".bmp")
+                return BadRequest("Desteklenmeyen dosya formatı.");
+
+            string tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Directory.CreateDirectory(tempFolder);
+            string tempFilePath = Path.Combine(tempFolder, file.FileName);
+
+            using (var fs = new FileStream(tempFilePath, FileMode.Create))
             {
-                CvInvoke.Rectangle(img, face, new MCvScalar(0, 0, 255), 2);
+                await file.CopyToAsync(fs);
             }
 
-            using var outStream = new MemoryStream();
-            img.ToBitmap().Save(outStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-            outStream.Position = 0;
-            return File(outStream.ToArray(), "image/jpeg", "faces_marked.jpg");
+            try
+            {
+                using var img = new Image<Bgr, byte>(tempFilePath);
+
+                var results = new List<(string fileName, Image<Bgr, byte> image)>();
+
+                var faces = faceCascade.DetectMultiScale(img, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+
+                foreach (var faceRect in faces)
+                {
+                    if (cropFace)
+                    {
+                        var faceImg = img.Copy(faceRect);
+                        results.Add(("face_" + Guid.NewGuid() + ".png", faceImg));
+                    }
+
+                    if (cropEyes)
+                    {
+                        var faceROI = img.Copy(faceRect);
+                        var eyes = eyesCascade.DetectMultiScale(faceROI, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+                        foreach (var eyeRect in eyes)
+                        {
+                            var eyeImg = faceROI.Copy(eyeRect);
+                            results.Add(("eye_" + Guid.NewGuid() + ".png", eyeImg));
+                        }
+                    }
+
+                    if (cropNose)
+                    {
+                        var faceROI = img.Copy(faceRect);
+                        var noses = noseCascade.DetectMultiScale(faceROI, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+                        foreach (var noseRect in noses)
+                        {
+                            var noseImg = faceROI.Copy(noseRect);
+                            results.Add(("nose_" + Guid.NewGuid() + ".png", noseImg));
+                        }
+                    }
+                }
+
+                if (results.Count == 0)
+                    return NotFound("Hiçbir özellik tespit edilmedi.");
+
+                string zipFileName = "selected_features_result.zip";
+                string zipFilePath = Path.Combine(tempFolder, zipFileName);
+
+                using (var zip = ZipFile.Open(zipFilePath, ZipArchiveMode.Create))
+                {
+                    foreach (var (fileName, image) in results)
+                    {
+                        using var ms = new MemoryStream();
+                        image.ToBitmap().Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        ms.Position = 0;
+                        var entry = zip.CreateEntry(fileName);
+                        using var entryStream = entry.Open();
+                        ms.CopyTo(entryStream);
+                    }
+                }
+
+                var zipBytes = await System.IO.File.ReadAllBytesAsync(zipFilePath);
+
+                Directory.Delete(tempFolder, true);
+
+                return File(zipBytes, "application/zip", zipFileName);
+            }
+            catch (Exception ex)
+            {
+                if (Directory.Exists(tempFolder))
+                    Directory.Delete(tempFolder, true);
+                return StatusCode(500, "İşlem sırasında hata: " + ex.Message);
+            }
+        }
+
+        [HttpPost("upload-video")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UploadVideo(
+            [FromQuery] bool cropFace = true,
+            [FromQuery] bool cropEyes = true,
+            [FromQuery] bool cropNose = true,
+            [FromQuery] double scaleFactor = 1.05,
+            [FromQuery] int minNeighbors = 3,
+            [FromQuery] int minWidth = 30,
+            [FromQuery] int minHeight = 30,
+            [FromQuery] double distance = 0)
+        {
+            if (Request.Form.Files.Count == 0)
+                return BadRequest("Dosya bulunamadı.");
+
+            var file = Request.Form.Files[0];
+            string ext = Path.GetExtension(file.FileName).ToLower();
+
+            if (ext != ".mp4" && ext != ".avi" && ext != ".mov" && ext != ".wmv" && ext != ".mkv")
+                return BadRequest("Desteklenmeyen video formatı.");
+
+            string tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Directory.CreateDirectory(tempFolder);
+            string tempFilePath = Path.Combine(tempFolder, file.FileName);
+
+            using (var fs = new FileStream(tempFilePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fs);
+            }
+
+            try
+            {
+                using var capture = new VideoCapture(tempFilePath);
+
+                var results = new List<(string fileName, Image<Bgr, byte> image)>();
+
+                int frameIndex = 0;
+                Mat frame = new Mat();
+
+                while (capture.Read(frame) && !frame.IsEmpty)
+                {
+                    using var image = frame.ToImage<Bgr, byte>();
+
+                    var faces = faceCascade.DetectMultiScale(image, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+
+                    foreach (var faceRect in faces)
+                    {
+                        if (cropFace)
+                        {
+                            var faceImg = image.Copy(faceRect);
+                            results.Add(($"video_{frameIndex}_face_{Guid.NewGuid()}.png", faceImg));
+                        }
+
+                        if (cropEyes)
+                        {
+                            var faceROI = image.Copy(faceRect);
+                            var eyes = eyesCascade.DetectMultiScale(faceROI, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+                            foreach (var eyeRect in eyes)
+                            {
+                                var eyeImg = faceROI.Copy(eyeRect);
+                                results.Add(($"video_{frameIndex}_eye_{Guid.NewGuid()}.png", eyeImg));
+                            }
+                        }
+
+                        if (cropNose)
+                        {
+                            var faceROI = image.Copy(faceRect);
+                            var noses = noseCascade.DetectMultiScale(faceROI, scaleFactor, minNeighbors, new Size(minWidth, minHeight));
+                            foreach (var noseRect in noses)
+                            {
+                                var noseImg = faceROI.Copy(noseRect);
+                                results.Add(($"video_{frameIndex}_nose_{Guid.NewGuid()}.png", noseImg));
+                            }
+                        }
+                    }
+
+                    frameIndex++;
+
+                    // Çok fazla kare işlemek istemezsen sınır koyabilirsin:
+                    if (frameIndex > 500) break;
+                }
+
+                if (results.Count == 0)
+                    return NotFound("Hiçbir özellik tespit edilmedi.");
+
+                string zipFileName = "selected_features_video_result.zip";
+                string zipFilePath = Path.Combine(tempFolder, zipFileName);
+
+                using (var zip = ZipFile.Open(zipFilePath, ZipArchiveMode.Create))
+                {
+                    foreach (var (fileName, image) in results)
+                    {
+                        using var ms = new MemoryStream();
+                        image.ToBitmap().Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        ms.Position = 0;
+                        var entry = zip.CreateEntry(fileName);
+                        using var entryStream = entry.Open();
+                        ms.CopyTo(entryStream);
+                    }
+                }
+
+                var zipBytes = await System.IO.File.ReadAllBytesAsync(zipFilePath);
+
+                Directory.Delete(tempFolder, true);
+
+                return File(zipBytes, "application/zip", zipFileName);
+            }
+            catch (Exception ex)
+            {
+                if (Directory.Exists(tempFolder))
+                    Directory.Delete(tempFolder, true);
+                return StatusCode(500, "Video işlem sırasında hata: " + ex.Message);
+            }
         }
     }
 }

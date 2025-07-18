@@ -12,7 +12,7 @@
         ],
         "parameters": [
           {
-            "name": "cropface",
+            "name": "cropFace",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -20,7 +20,7 @@
             }
           },
           {
-            "name": "cropeyes",
+            "name": "cropEyes",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -28,7 +28,7 @@
             }
           },
           {
-            "name": "cropnose",
+            "name": "cropNose",
             "in": "query",
             "schema": {
               "type": "boolean",
@@ -70,6 +70,15 @@
               "format": "int32",
               "default": 30
             }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "default": 0
+            }
           }
         ],
         "requestBody": {
@@ -99,27 +108,12 @@
         }
       }
     },
-    "/api/DetectFaceFeaturesController1/upload-and-process": {
+    "/api/DetectFaceFeatures/upload-video": {
       "post": {
         "tags": [
-          "DetectFaceFeaturesController1"
+          "DetectFaceFeatures"
         ],
         "parameters": [
-          {
-            "name": "iscropped",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "faceName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
           {
             "name": "scaleFactor",
             "in": "query",
@@ -188,6 +182,172 @@
       "get": {
         "tags": [
           "Gallery"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SelectedFeatures/upload-and-process": {
+      "post": {
+        "tags": [
+          "SelectedFeatures"
+        ],
+        "parameters": [
+          {
+            "name": "cropFace",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "cropEyes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "cropNose",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "scaleFactor",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 1.05
+            }
+          },
+          {
+            "name": "minNeighbors",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "minWidth",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 30
+            }
+          },
+          {
+            "name": "minHeight",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 30
+            }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SelectedFeatures/upload-video": {
+      "post": {
+        "tags": [
+          "SelectedFeatures"
+        ],
+        "parameters": [
+          {
+            "name": "cropFace",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "cropEyes",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "cropNose",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "scaleFactor",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 1.05
+            }
+          },
+          {
+            "name": "minNeighbors",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "minWidth",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 30
+            }
+          },
+          {
+            "name": "minHeight",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 30
+            }
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 0
+            }
+          }
         ],
         "responses": {
           "200": {

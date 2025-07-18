@@ -1,9 +1,8 @@
-using FotoFromFaceControl.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +20,6 @@ builder.Services.AddSwaggerGen(c =>
     c.OperationFilter<SwaggerFileOperationFilter>();
 });
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -32,6 +29,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -39,9 +37,9 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads")),
     RequestPath = "/uploads"
 });
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-

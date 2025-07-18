@@ -77,3 +77,4 @@ C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\Debug\net8.0-windows\ref\Fo
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\Debug\net8.0-windows\wwwroot\CasCades\haarcascade_eye.xml
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\Debug\net8.0-windows\wwwroot\CasCades\haarcascade_frontalface_default.xml
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\Debug\net8.0-windows\wwwroot\CasCades\nose.xml
+C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\Debug\net8.0-windows\FotoFromFaceControl.sourcelink.json

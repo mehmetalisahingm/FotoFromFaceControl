@@ -2,400 +2,492 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8" />
-    <title>Yüz Kırpma & Özellik Seçimi - Modern Tasarım</title>
+    <title>Yüz Tespiti ve Özellik Ayıklama</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-        * {
-            box-sizing: border-box;
-        }
-
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: #f0f0f0;
             margin: 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            font-family: 'Poppins', sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            min-height: 100vh;
-            color: #fff;
+            user-select: none;
         }
 
         .container-wrapper {
             display: flex;
-            gap: 48px;
-            max-width: 1000px;
-            width: 100%;
-            justify-content: center;
-            align-items: stretch;
             flex-wrap: wrap;
+            gap: 45px;
+            justify-content: center;
+            max-width: 950px;
+            width: 100%;
         }
 
         .card {
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-            width: 480px;
-            padding: 36px 40px 48px;
-            color: #333;
+            background: #1f2937;
+            padding: 30px 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            width: 440px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 40px;
         }
 
             .card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+                transform: translateY(-10px);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+                border-color: #3b82f6;
             }
 
-        h2 {
-            font-size: 34px;
-            margin: 0 0 32px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            user-select: none;
-            text-align: center;
-        }
+            .card h2 {
+                margin-top: 0;
+                font-weight: 800;
+                font-size: 2.1rem;
+                margin-bottom: 22px;
+                color: #60a5fa;
+                border-bottom: 3px solid #3b82f6;
+                padding-bottom: 10px;
+                letter-spacing: 0.06em;
+                user-select: text;
+            }
 
-        input[type="file"],
-        input[type="number"],
-        input[type="text"] {
+        input[type="file"], input[type="number"] {
             width: 100%;
-            padding: 14px 20px;
-            font-size: 17px;
-            border-radius: 16px;
-            border: 1.8px solid #ddd;
-            margin-bottom: 26px;
-            transition: border-color 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 12px;
+            border: none;
+            background-color: #374151;
+            color: #e5e7eb;
+            cursor: pointer;
+            box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+            user-select: text;
         }
 
-            input[type="file"]:hover, input[type="file"]:focus,
-            input[type="number"]:hover, input[type="number"]:focus,
-            input[type="text"]:hover, input[type="text"]:focus {
-                border-color: #dd2a7b;
-                outline: none;
-                box-shadow: 0 4px 14px rgba(221,42,123,0.6);
+            input[type="file"]::file-selector-button {
+                cursor: pointer;
+                background-color: #3b82f6;
+                border: none;
+                padding: 10px 18px;
+                margin-right: 15px;
+                border-radius: 12px;
+                color: white;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
             }
+
+                input[type="file"]::file-selector-button:hover {
+                    background-color: #2563eb;
+                }
 
         .checkbox-group {
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
             .checkbox-group label {
                 display: flex;
                 align-items: center;
-                font-weight: 600;
-                color: #555;
+                font-size: 1.05rem;
+                margin-bottom: 14px;
                 cursor: pointer;
-                margin-bottom: 18px;
+                color: #d1d5db;
+                transition: color 0.3s ease;
                 user-select: none;
             }
 
-            .checkbox-group input {
-                margin-right: 14px;
-                transform: scale(1.4);
-                cursor: pointer;
-            }
+                .checkbox-group label:hover {
+                    color: #60a5fa;
+                }
+
+        input[type="checkbox"] {
+            margin-right: 12px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #3b82f6;
+            flex-shrink: 0;
+        }
 
         button {
-            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-            border: none;
-            padding: 18px 0;
-            border-radius: 20px;
+            width: 100%;
+            padding: 14px 0;
+            font-size: 1.15rem;
             font-weight: 700;
-            font-size: 22px;
-            color: white;
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+            color: #f9fafb;
+            border: none;
+            border-radius: 14px;
             cursor: pointer;
+            box-shadow: 0 7px 20px rgba(59, 130, 246, 0.6);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
             user-select: none;
-            transition: background-position 0.6s ease, box-shadow 0.3s ease;
-            background-size: 300% 300%;
-            background-position: 0% 50%;
-            box-shadow: 0 6px 15px rgba(221,42,123,0.6);
+            margin-bottom: 10px;
         }
 
             button:hover {
-                background-position: 100% 50%;
-                box-shadow: 0 10px 25px rgba(221,42,123,0.8);
+                background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+                box-shadow: 0 10px 30px rgba(37, 99, 235, 0.8);
             }
 
-        #result1, #result2 {
-            margin-top: 28px;
-            font-weight: 700;
-            font-size: 18px;
-            min-height: 28px;
-            text-align: center;
-            user-select: none;
-            color: #444;
-            word-break: break-all;
-        }
-
         .message-success {
-            color: #27ae60;
+            color: #22c55e;
+            margin-top: 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            user-select: text;
         }
 
         .message-error {
-            color: #e74c3c;
+            color: #ef4444;
+            margin-top: 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            user-select: text;
         }
 
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #dd2a7b;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            margin: 16px auto 0;
-            animation: spin 1s linear infinite;
+        #processedFiles1, #processedFiles2 {
+            margin-top: 20px;
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 12px;
+            background: #111827;
+            border-radius: 12px;
+            border: 1px solid #374151;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+            #processedFiles1 strong, #processedFiles2 strong {
+                margin-bottom: 10px;
+                user-select: text;
+                font-size: 1.1rem;
+                color: #9ca3af;
             }
 
-            100% {
-                transform: rotate(360deg);
-            }
+        .processed-file {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            user-select: text;
         }
 
-        /* Responsive alt alta geçiş */
-        @media (max-width: 1020px) {
+            .processed-file.success {
+                background-color: #16a34a; /* yeşil */
+            }
+
+            .processed-file.processing {
+                background-color: #facc15; /* sarı */
+                color: #1e293b;
+                font-style: italic;
+            }
+
+            .processed-file.error {
+                background-color: #dc2626; /* kırmızı */
+            }
+
+            .processed-file a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+                .processed-file a:hover {
+                    text-decoration: underline;
+                }
+
+        @media (max-width: 960px) {
             body {
-                padding: 24px 14px;
+                padding: 30px 12px;
             }
 
             .container-wrapper {
                 flex-direction: column;
-                gap: 40px;
-                max-width: 90vw;
                 align-items: center;
+                gap: 30px;
             }
 
             .card {
                 width: 100%;
-                max-width: 480px;
+                max-width: 420px;
             }
         }
     </style>
 </head>
 <body>
-
     <div class="container-wrapper">
-        <!-- DetectFaceFeatures API card -->
-        <div class="card" id="detectFaceFeaturesCard">
+        <!-- DetectFaceFeatures Bölümü -->
+        <div class="card">
             <h2>DetectFaceFeatures</h2>
-            <input type="file" id="photoInput1" accept="image/*" />
-            <p id="selectedFileName1" style="text-align:center; color:#777; font-weight:600; margin:10px 0;"></p>
+            <input type="file" id="inputFile1" accept="image/*,video/*" />
+            <p id="selectedFileName1">Dosya seçilmedi</p>
             <div class="checkbox-group">
-                <label><input type="checkbox" id="iscropped" checked /> Kırpılmış hali için işaretle</label>
+                <label><input type="checkbox" id="iscropped" checked /> Yüzü Kırp</label>
             </div>
-
-            <label for="scaleFactor">Scale Factor (ör. 1.05):</label>
-            <input type="number" id="scaleFactor" step="0.01" min="1" max="2" value="1.05" />
-
-            <label for="minNeighbors">Min Neighbors (ör. 3):</label>
-            <input type="number" id="minNeighbors" min="1" max="10" value="3" />
-
-            <label for="minWidth">Min Face Width (px):</label>
-            <input type="number" id="minWidth" min="1" max="500" value="30" />
-
-            <label for="minHeight">Min Face Height (px):</label>
-            <input type="number" id="minHeight" min="1" max="500" value="30" />
-
+            <div>
+                <label>
+                    Scale Factor:
+                    <input type="number" id="scaleFactor1" step="0.01" min="1" max="2" value="1.05" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Neighbors:
+                    <input type="number" id="minNeighbors1" min="0" max="10" value="3" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Width:
+                    <input type="number" id="minWidth1" min="1" max="200" value="30" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Height:
+                    <input type="number" id="minHeight1" min="1" max="200" value="30" />
+                </label>
+            </div>
             <button onclick="uploadDetectFaceFeatures()">Gönder ve İndir</button>
             <div id="result1"></div>
+            <div id="processedFiles1">
+                <strong>İşlenen Dosyalar:</strong>
+                <div id="fileList1">
+                    <p>Henüz işlem yapılmadı.</p>
+                </div>
+            </div>
         </div>
 
-        <!-- SelectedFeatures API card -->
-        <div class="card" id="selectedFeaturesCard">
+        <!-- SelectedFeatures Bölümü -->
+        <div class="card">
             <h2>SelectedFeatures</h2>
-            <input type="file" id="photoInput2" accept="image/*" />
-            <p id="selectedFileName2" style="text-align:center; color:#777; font-weight:600; margin:10px 0;"></p>
-
+            <input type="file" id="inputFile2" accept="image/*,video/*" />
+            <p id="selectedFileName2">Dosya seçilmedi</p>
             <div class="checkbox-group">
-                <label><input type="checkbox" id="cropFace" checked /> Yüzü Kırp</label>
-                <label><input type="checkbox" id="cropEyes" /> Gözleri Kırp</label>
-                <label><input type="checkbox" id="cropNose" /> Burnu Kırp</label>
+                <label><input type="checkbox" id="cropFace" checked /> Yüz</label>
+                <label><input type="checkbox" id="cropEyes" checked /> Gözler</label>
+                <label><input type="checkbox" id="cropNose" checked /> Burun</label>
             </div>
-
-            <label for="scaleFactor2">Scale Factor (ör. 1.05):</label>
-            <input type="number" id="scaleFactor2" step="0.01" min="1" max="2" value="1.05" />
-
-            <label for="minNeighbors2">Min Neighbors (ör. 3):</label>
-            <input type="number" id="minNeighbors2" min="1" max="10" value="3" />
-
-            <label for="minWidth2">Min Face Width (px):</label>
-            <input type="number" id="minWidth2" min="1" max="500" value="30" />
-
-            <label for="minHeight2">Min Face Height (px):</label>
-            <input type="number" id="minHeight2" min="1" max="500" value="30" />
-
+            <div>
+                <label>
+                    Scale Factor:
+                    <input type="number" id="scaleFactor2" step="0.01" min="1" max="2" value="1.05" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Neighbors:
+                    <input type="number" id="minNeighbors2" min="0" max="10" value="3" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Width:
+                    <input type="number" id="minWidth2" min="1" max="200" value="30" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Min Height:
+                    <input type="number" id="minHeight2" min="1" max="200" value="30" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Distance:
+                    <input type="number" id="distance2" step="0.1" min="0" max="100" value="0" />
+                </label>
+            </div>
             <button onclick="uploadSelectedFeatures()">Gönder ve İndir</button>
             <div id="result2"></div>
+            <div id="processedFiles2">
+                <strong>İşlenen Dosyalar:</strong>
+                <div id="fileList2">
+                    <p>Henüz işlem yapılmadı.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Dosya isimlerini gösterme
-        document.getElementById('photoInput1').addEventListener('change', function () {
-            const fileName = this.files.length ? this.files[0].name : '';
-            document.getElementById('selectedFileName1').textContent = fileName;
+        // Dosya seçildiğinde dosya adlarını göster
+        document.getElementById('inputFile1').addEventListener('change', function () {
+            const name = this.files.length ? this.files[0].name : "Dosya seçilmedi";
+            document.getElementById('selectedFileName1').textContent = name;
         });
-        document.getElementById('photoInput2').addEventListener('change', function () {
-            const fileName = this.files.length ? this.files[0].name : '';
-            document.getElementById('selectedFileName2').textContent = fileName;
+        document.getElementById('inputFile2').addEventListener('change', function () {
+            const name = this.files.length ? this.files[0].name : "Dosya seçilmedi";
+            document.getElementById('selectedFileName2').textContent = name;
         });
 
-        async function uploadDetectFaceFeatures() {
-            const input = document.getElementById('photoInput1');
-            if (input.files.length === 0) {
-                alert('Lütfen bir resim seçin.');
+        const processedFiles1 = [];
+        const processedFiles2 = [];
+
+        function renderProcessedFiles(listId, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            if (listId.length === 0) {
+                container.innerHTML = '<p>Henüz işlem yapılmadı.</p>';
                 return;
             }
 
+            listId.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'processed-file';
+
+                if (item.status === 'success') div.classList.add('success');
+                else if (item.status === 'processing') div.classList.add('processing');
+                else if (item.status === 'error') div.classList.add('error');
+
+                if (item.status === 'success') {
+                    div.innerHTML = `<a href="${item.url}" download="${item.name}">${item.name}</a>`;
+                } else if (item.status === 'processing') {
+                    div.textContent = `${item.name} - İşlem devam ediyor...`;
+                } else {
+                    div.textContent = `${item.name} - İşlem başarısız!`;
+                }
+                container.appendChild(div);
+            });
+        }
+
+        async function uploadDetectFaceFeatures() {
+            const input = document.getElementById('inputFile1');
+            if (!input.files.length) {
+                alert('Lütfen bir dosya seçin.');
+                return;
+            }
+            const file = input.files[0];
             const formData = new FormData();
-            formData.append('photo.File', input.files[0]);  // backend modelin FileUploadModel fotoğraf alanı
+            formData.append('file', file);
 
-            // Query params
-            const iscropped = document.getElementById('iscropped').checked;
-            const scaleFactor = document.getElementById('scaleFactor').value;
-            const minNeighbors = document.getElementById('minNeighbors').value;
-            const minWidth = document.getElementById('minWidth').value;
-            const minHeight = document.getElementById('minHeight').value;
+            const params = new URLSearchParams({
+                iscropped: document.getElementById('iscropped').checked,
+                scaleFactor: parseFloat(document.getElementById('scaleFactor1').value),
+                minNeighbors: parseInt(document.getElementById('minNeighbors1').value),
+                minWidth: parseInt(document.getElementById('minWidth1').value),
+                minHeight: parseInt(document.getElementById('minHeight1').value)
+            });
 
-            const url = `/api/DetectFaceFeatures/upload-and-process` +
-                `?cropface=${iscropped}` +
-                `&cropeyes=false` +  // DetectFaceFeatures'da sadece cropface kullanıyoruz burada
-                `&cropnose=false` +
-                `&scaleFactor=${scaleFactor}` +
-                `&minNeighbors=${minNeighbors}` +
-                `&minWidth=${minWidth}` +
-                `&minHeight=${minHeight}`;
+            const isVideo = file.type.startsWith('video/');
+            const endpoint = isVideo ? 'upload-video' : 'upload-and-process';
 
-            setLoading('result1', true);
+            processedFiles1.push({ name: file.name, status: 'processing', url: '' });
+            renderProcessedFiles(processedFiles1, 'fileList1');
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(`/api/DetectFaceFeatures/${endpoint}?${params.toString()}`, {
                     method: 'POST',
                     body: formData
                 });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    setResult('result1', errorText, false);
-                    setLoading('result1', false);
-                    return;
-                }
+                if (!response.ok) throw new Error(await response.text());
 
                 const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
 
-                if (blob.type === 'application/zip') {
-                    downloadBlob(blob, 'cropped_faces.zip');
-                    setResult('result1', 'Başarılı! Zip dosyası indirildi.', true);
-                } else if (blob.type.startsWith('image/')) {
-                    const url = URL.createObjectURL(blob);
-                    setResult('result1', `<img src="${url}" style="max-width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.2)" />`, true);
-                } else {
-                    setResult('result1', 'Bilinmeyen dosya formatı alındı.', false);
+                const item = processedFiles1.find(f => f.name === file.name && f.status === 'processing');
+                if (item) {
+                    item.status = 'success';
+                    item.url = url;
                 }
-            } catch (err) {
-                setResult('result1', 'İstek gönderilirken hata oluştu: ' + err.message, false);
-            }
+                renderProcessedFiles(processedFiles1, 'fileList1');
 
-            setLoading('result1', false);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'detectface_result.zip';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+
+                document.getElementById('result1').textContent = 'İşlem başarılı!';
+                document.getElementById('result1').className = 'message-success';
+            } catch (error) {
+                const item = processedFiles1.find(f => f.name === file.name && f.status === 'processing');
+                if (item) {
+                    item.status = 'error';
+                }
+                renderProcessedFiles(processedFiles1, 'fileList1');
+
+                document.getElementById('result1').textContent = `Hata: ${error.message}`;
+                document.getElementById('result1').className = 'message-error';
+            }
         }
 
         async function uploadSelectedFeatures() {
-            const input = document.getElementById('photoInput2');
-            if (input.files.length === 0) {
-                alert('Lütfen bir resim seçin.');
+            const input = document.getElementById('inputFile2');
+            if (!input.files.length) {
+                alert('Lütfen bir dosya seçin.');
                 return;
             }
-
+            const file = input.files[0];
             const formData = new FormData();
-            formData.append('photo.File', input.files[0]);
+            formData.append('file', file);
 
-            // Query params
-            const cropFace = document.getElementById('cropFace').checked;
-            const cropEyes = document.getElementById('cropEyes').checked;
-            const cropNose = document.getElementById('cropNose').checked;
-            const scaleFactor = document.getElementById('scaleFactor2').value;
-            const minNeighbors = document.getElementById('minNeighbors2').value;
-            const minWidth = document.getElementById('minWidth2').value;
-            const minHeight = document.getElementById('minHeight2').value;
+            const params = new URLSearchParams({
+                cropFace: document.getElementById('cropFace').checked,
+                cropEyes: document.getElementById('cropEyes').checked,
+                cropNose: document.getElementById('cropNose').checked,
+                scaleFactor: parseFloat(document.getElementById('scaleFactor2').value),
+                minNeighbors: parseInt(document.getElementById('minNeighbors2').value),
+                minWidth: parseInt(document.getElementById('minWidth2').value),
+                minHeight: parseInt(document.getElementById('minHeight2').value),
+                distance: parseFloat(document.getElementById('distance2').value)
+            });
 
-            const url = `/api/DetectFaceFeatures/upload-and-process` +
-                `?cropface=${cropFace}` +
-                `&cropeyes=${cropEyes}` +
-                `&cropnose=${cropNose}` +
-                `&scaleFactor=${scaleFactor}` +
-                `&minNeighbors=${minNeighbors}` +
-                `&minWidth=${minWidth}` +
-                `&minHeight=${minHeight}`;
+            const isVideo = file.type.startsWith('video/');
+            const endpoint = isVideo ? 'upload-video' : 'upload-and-process';
 
-            setLoading('result2', true);
+            processedFiles2.push({ name: file.name, status: 'processing', url: '' });
+            renderProcessedFiles(processedFiles2, 'fileList2');
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(`/api/SelectedFeatures/${endpoint}?${params.toString()}`, {
                     method: 'POST',
                     body: formData
                 });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    setResult('result2', errorText, false);
-                    setLoading('result2', false);
-                    return;
-                }
+                if (!response.ok) throw new Error(await response.text());
 
                 const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
 
-                if (blob.type === 'application/zip') {
-                    downloadBlob(blob, 'cropped_features.zip');
-                    setResult('result2', 'Başarılı! Zip dosyası indirildi.', true);
-                } else if (blob.type.startsWith('image/')) {
-                    const url = URL.createObjectURL(blob);
-                    setResult('result2', `<img src="${url}" style="max-width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.2)" />`, true);
-                } else {
-                    setResult('result2', 'Bilinmeyen dosya formatı alındı.', false);
+                const item = processedFiles2.find(f => f.name === file.name && f.status === 'processing');
+                if (item) {
+                    item.status = 'success';
+                    item.url = url;
                 }
-            } catch (err) {
-                setResult('result2', 'İstek gönderilirken hata oluştu: ' + err.message, false);
+                renderProcessedFiles(processedFiles2, 'fileList2');
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'selected_features_result.zip';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+
+                document.getElementById('result2').textContent = 'İşlem başarılı!';
+                document.getElementById('result2').className = 'message-success';
+            } catch (error) {
+                const item = processedFiles2.find(f => f.name === file.name && f.status === 'processing');
+                if (item) {
+                    item.status = 'error';
+                }
+                renderProcessedFiles(processedFiles2, 'fileList2');
+
+                document.getElementById('result2').textContent = `Hata: ${error.message}`;
+                document.getElementById('result2').className = 'message-error';
             }
-
-            setLoading('result2', false);
-        }
-
-        function setLoading(resultId, isLoading) {
-            const container = document.getElementById(resultId);
-            if (isLoading) {
-                container.innerHTML = '<div class="loading-spinner"></div>';
-            } else {
-                // loading bitti, içerik kalacak
-            }
-        }
-
-        function setResult(resultId, messageOrHtml, success) {
-            const container = document.getElementById(resultId);
-            container.innerHTML = messageOrHtml;
-            container.className = success ? 'message-success' : 'message-error';
-        }
-
-        function downloadBlob(blob, filename) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            URL.revokeObjectURL(url);
         }
     </script>
-
 </body>
 </html>

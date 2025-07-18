@@ -1,7 +1,7 @@
 [
   {
-    "ContainingType": "DetectFaceFeaturesController",
-    "Method": "UploadAndProcess",
+    "ContainingType": "FotoFromFaceControl.Controllers.DetectFaceFeaturesController",
+    "Method": "UploadAndProcessAsync",
     "RelativePath": "api/DetectFaceFeatures/upload-and-process",
     "HttpMethod": "POST",
     "IsController": true,
@@ -13,17 +13,17 @@
         "IsRequired": false
       },
       {
-        "Name": "cropface",
+        "Name": "cropFace",
         "Type": "System.Boolean",
         "IsRequired": false
       },
       {
-        "Name": "cropeyes",
+        "Name": "cropEyes",
         "Type": "System.Boolean",
         "IsRequired": false
       },
       {
-        "Name": "cropnose",
+        "Name": "cropNose",
         "Type": "System.Boolean",
         "IsRequired": false
       },
@@ -46,14 +46,19 @@
         "Name": "minHeight",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "distance",
+        "Type": "System.Single",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "DetectFaceFeaturesController1",
-    "Method": "UploadAndProcess",
-    "RelativePath": "api/DetectFaceFeaturesController1/upload-and-process",
+    "ContainingType": "FotoFromFaceControl.Controllers.DetectFaceFeaturesController",
+    "Method": "UploadAndProcessVideo",
+    "RelativePath": "api/DetectFaceFeatures/upload-video",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -61,16 +66,6 @@
       {
         "Name": "File",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "iscropped",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      },
-      {
-        "Name": "faceName",
-        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -104,6 +99,108 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.SelectedFeaturesController",
+    "Method": "UploadAndProcess",
+    "RelativePath": "api/SelectedFeatures/upload-and-process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cropFace",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropEyes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropNose",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "scaleFactor",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "minNeighbors",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minWidth",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minHeight",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "distance",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FotoFromFaceControl.Controllers.SelectedFeaturesController",
+    "Method": "UploadVideo",
+    "RelativePath": "api/SelectedFeatures/upload-video",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cropFace",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropEyes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "cropNose",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "scaleFactor",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "minNeighbors",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minWidth",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minHeight",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "distance",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
