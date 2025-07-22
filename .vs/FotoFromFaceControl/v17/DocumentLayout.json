@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:wwwroot\\html\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\selectedfetures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\selectedfetures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\facesimilaritycontrollerlib.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\facesimilaritycontrollerlib.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\uploadandprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|c:\\users\\rsa004\\source\\repos\\fotofromfacecontrol\\controllers\\facesimilaritycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5E1B1B8-2678-43CF-9C6D-C1073669EF6F}|FotoFromFaceControl.csproj|solutionrelative:controllers\\facesimilaritycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +22,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FaceSimilarityController.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\FaceSimilarityController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FaceSimilarityController.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\FaceSimilarityController.cs",
+              "RelativeToolTip": "Controllers\\FaceSimilarityController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T13:06:06.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FaceSimilarityControllerLib.cs",
+              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\FaceSimilarityControllerLib.cs",
+              "RelativeDocumentMoniker": "Controllers\\FaceSimilarityControllerLib.cs",
+              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\FaceSimilarityControllerLib.cs",
+              "RelativeToolTip": "Controllers\\FaceSimilarityControllerLib.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAswD0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T12:34:52.858Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -32,35 +58,9 @@
               "RelativeDocumentMoniker": "wwwroot\\html\\index.html",
               "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\wwwroot\\html\\index.html",
               "RelativeToolTip": "wwwroot\\html\\index.html",
-              "ViewState": "AgIAALQBAAAAAAAAAAAqwO0BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALMCAAAAAAAAAAAAwMUCAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-07-17T09:18:41.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SelectedFetures.cs",
-              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\SelectedFetures.cs",
-              "RelativeDocumentMoniker": "Controllers\\SelectedFetures.cs",
-              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\SelectedFetures.cs",
-              "RelativeToolTip": "Controllers\\SelectedFetures.cs",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAUwPoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T07:56:56.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UploadAndProcess.cs",
-              "DocumentMoniker": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadAndProcess.cs",
-              "RelativeDocumentMoniker": "Controllers\\UploadAndProcess.cs",
-              "ToolTip": "C:\\Users\\Rsa004\\source\\repos\\FotoFromFaceControl\\Controllers\\UploadAndProcess.cs",
-              "RelativeToolTip": "Controllers\\UploadAndProcess.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAUwKIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T07:50:15.976Z",
+              "WhenOpened": "2025-07-22T12:27:34.292Z",
               "EditorCaption": ""
             }
           ]

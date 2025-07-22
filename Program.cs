@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using System.Threading.Channels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddSwaggerGen(c =>
 {
     c.OperationFilter<SwaggerFileOperationFilter>();
+  
+    //c.OperationFilter<SwaggerFileOperationFilterForCompareFaces>();
 });
+
+builder.Services.AddSingleton(Channel.CreateUnbounded<Func<CancellationToken, Task>>());
+builder.Services.AddHostedService<BackgroundProcessingService>();
+
 
 var app = builder.Build();
 

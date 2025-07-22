@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
 using System.Linq;
 
 public class SwaggerFileOperationFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var fileParams = context.MethodInfo.GetParameters()
-            .Where(p => p.ParameterType == typeof(IFormFile))
-            .ToList();
+        var hasFileUpload = context.MethodInfo.GetParameters()
+            .Any(p => p.ParameterType.Name == "FileUploadModel");
 
-        if (!fileParams.Any())
+        if (!hasFileUpload)
             return;
 
         operation.RequestBody = new OpenApiRequestBody
@@ -24,14 +21,15 @@ public class SwaggerFileOperationFilter : IOperationFilter
                     Schema = new OpenApiSchema
                     {
                         Type = "object",
-                        Properties = fileParams.ToDictionary(
-                            p => p.Name,
-                            p => new OpenApiSchema
+                        Properties =
+                        {
+                            ["file"] = new OpenApiSchema
                             {
                                 Type = "string",
                                 Format = "binary"
-                            }),
-                        Required = new HashSet<string>(fileParams.Select(p => p.Name))
+                            }
+                        },
+                        Required = new System.Collections.Generic.HashSet<string> { "file" }
                     }
                 }
             }

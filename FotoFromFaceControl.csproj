@@ -5,17 +5,23 @@
     <UseWindowsForms>true</UseWindowsForms> <!-- Gerekli çünkü System.Drawing bunu ister -->
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DlibDotNet" Version="19.21.0.20220724" />
     <PackageReference Include="Emgu.CV" Version="4.11.0.5746" />
     <PackageReference Include="Emgu.CV.Bitmap" Version="4.11.0.5746" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.11.0.5746" />
+    <PackageReference Include="FaceRecognitionDotNet" Version="1.3.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.7" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\CasCades\dlib_face_recognition_resnet_model_v1.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\CasCades\haarcascade_eye.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -25,6 +31,18 @@
     <Content Update="wwwroot\CasCades\nose.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\CasCades\shape_predictor_68_face_landmarks %282%29.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\CasCades\shape_predictor_68_face_landmarks.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\FaceLibrary\" />
+    <Folder Include="wwwroot\models\" />
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>
