@@ -74,6 +74,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FotoFromFaceControl.Controllers.FaceSimilarityController",
+    "Method": "FindMostSimilar",
+    "RelativePath": "api/FaceSimilarity/find-most-similar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FotoFromFaceControl.Controllers.GalleryController",
     "Method": "GetPhotos",
     "RelativePath": "api/Gallery/photos",
@@ -110,6 +126,36 @@
       {
         "Name": "File",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CropEyes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "CropNose",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "CropFace",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "EyeScale",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "NoseScale",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "FaceScale",
+        "Type": "System.Double",
         "IsRequired": false
       }
     ],

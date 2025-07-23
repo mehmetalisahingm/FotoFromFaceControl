@@ -109,3 +109,6 @@ C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\x64\Debug\net8.0-windows\re
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\x64\Debug\net8.0-windows\FotoFromFaceControl.pdb
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\x64\Debug\net8.0-windows\FotoFromFaceControl.genruntimeconfig.cache
 C:\Users\Rsa004\source\repos\FotoFromFaceControl\obj\x64\Debug\net8.0-windows\ref\FotoFromFaceControl.dll
+C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\x64\Debug\net8.0-windows\wwwroot\models\shape_predictor_68_face_landmarks.dat
+C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\x64\Debug\net8.0-windows\wwwroot\models\shape_predictor_5_face_landmarks.dat
+C:\Users\Rsa004\source\repos\FotoFromFaceControl\bin\x64\Debug\net8.0-windows\wwwroot\models\mmod_human_face_detector.dat

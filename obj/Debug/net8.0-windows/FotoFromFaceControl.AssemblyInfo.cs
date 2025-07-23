@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FotoFromFaceControl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71194429e4f91e5e8b275d7f91ee6f46c48afcba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffc150262b6af434191562073ed6eff5f210c983")]
 [assembly: System.Reflection.AssemblyProductAttribute("FotoFromFaceControl")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FotoFromFaceControl")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -37,11 +37,19 @@
     <Content Update="wwwroot\CasCades\shape_predictor_68_face_landmarks.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\models\mmod_human_face_detector.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\models\shape_predictor_5_face_landmarks.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\models\shape_predictor_68_face_landmarks.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\FaceLibrary\" />
-    <Folder Include="wwwroot\models\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

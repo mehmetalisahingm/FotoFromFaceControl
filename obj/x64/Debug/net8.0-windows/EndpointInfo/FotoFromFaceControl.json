@@ -87,6 +87,36 @@
         }
       }
     },
+    "/api/FaceSimilarity/find-most-similar": {
+      "post": {
+        "tags": [
+          "FaceSimilarity"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/FaceSimilarity/compare": {
       "post": {
         "tags": [

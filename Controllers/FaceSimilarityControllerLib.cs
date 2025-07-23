@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FaceRecognitionDotNet;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 
@@ -22,18 +21,20 @@ namespace FotoFromFaceControl.Controllers
             _uploadPath = Path.Combine(env.ContentRootPath, "wwwroot", "Uploads");
 
             Directory.CreateDirectory(_uploadPath);
+            Directory.CreateDirectory(_libraryPath);
+
             _faceRecognition = FaceRecognition.Create(_modelsPath);
         }
 
         [HttpPost("find-most-similar")]
-        public IActionResult FindMostSimilar([FromForm] IFormFile file)
+        public IActionResult FindMostSimilar([FromForm] FileUploadModel file)
         {
-            if (file == null || file.Length == 0)
+            if (file == null || file.File.Length == 0)
                 return BadRequest("Dosya yüklenemedi.");
 
-            var uploadedFilePath = Path.Combine(_uploadPath, Guid.NewGuid() + Path.GetExtension(file.FileName));
+            var uploadedFilePath = Path.Combine(_uploadPath, $"{Guid.NewGuid()}{Path.GetExtension(file.File.FileName)}");
             using (var stream = new FileStream(uploadedFilePath, FileMode.Create))
-                file.CopyTo(stream);
+                file.File.CopyTo(stream);
 
             try
             {
@@ -62,7 +63,7 @@ namespace FotoFromFaceControl.Controllers
                         if (similarity > bestScore)
                         {
                             bestScore = similarity;
-                            bestMatchFile = Path.GetFileName(filePath);
+                            bestMatchFile = filePath;
                         }
                     }
                     catch
@@ -74,17 +75,33 @@ namespace FotoFromFaceControl.Controllers
                 if (bestMatchFile == null)
                     return NotFound("Benzer yüz bulunamadı.");
 
-                return Ok(new
-                {
-                    EnBenzerResim = bestMatchFile,
-                    BenzerlikOrani = Math.Round(bestScore * 100, 2)
-                });
+                var fileBytes = System.IO.File.ReadAllBytes(bestMatchFile);
+                var mimeType = GetMimeType(bestMatchFile);
+                var fileName = Path.GetFileName(bestMatchFile);
+
+                Response.Headers.Add("X-Benzerlik-Orani", Math.Round(bestScore * 100, 2).ToString());
+
+                return File(fileBytes, mimeType, fileName); // frontend bunu doğrudan indirir
             }
             finally
             {
                 System.IO.File.Delete(uploadedFilePath);
             }
         }
+
+        private string GetMimeType(string fileName)
+        {
+            var ext = Path.GetExtension(fileName).ToLowerInvariant();
+            return ext switch
+            {
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".png" => "image/png",
+                ".bmp" => "image/bmp",
+                ".gif" => "image/gif",
+                _ => "application/octet-stream"
+            };
+        }
+
         public class FileUploadModel
         {
             public IFormFile File { get; set; } = null!;
