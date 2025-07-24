@@ -87,10 +87,10 @@
         }
       }
     },
-    "/api/FaceSimilarity/find-most-similar": {
+    "/api/DynamicFaceLibrary/find-most-similar-from-zip": {
       "post": {
         "tags": [
-          "FaceSimilarity"
+          "DynamicFaceLibrary"
         ],
         "requestBody": {
           "content": {
@@ -144,6 +144,36 @@
                 },
                 "File2": {
                   "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FaceSimilarity/find-most-similar": {
+      "post": {
+        "tags": [
+          "FaceSimilarity"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
                 }
               }
             }

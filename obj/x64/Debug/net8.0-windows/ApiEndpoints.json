@@ -53,6 +53,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FotoFromFaceControl.Controllers.DynamicFaceLibraryController",
+    "Method": "FindMostSimilarFromZip",
+    "RelativePath": "api/DynamicFaceLibrary/find-most-similar-from-zip",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Photo",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "LibraryZip",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FaceSimilarityApi.Controllers.FaceSimilarityController",
     "Method": "CompareFaces",
     "RelativePath": "api/FaceSimilarity/compare",
